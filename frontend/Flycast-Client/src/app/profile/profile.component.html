@@ -1,0 +1,121 @@
+<div class="min-h-screen min-w-screen bg-primary-800/40">
+  <p-toast></p-toast>
+  <app-navbar [items]="items"></app-navbar>
+  <div class="p-5 text-center">
+    <p-card header="This is {{clientDTO.username}}"
+            class="flex flex-col w-full shadow-2xl text-center font-bold rounded-2xl">
+      <div class="flex flex-col gap-3 w-full">
+        <div id="form" class="flex flex-col gap-5 py-3 items-center">
+          <div class="relative flex justify-center w-full">
+            <p-button
+              size="small"
+              rounded="rounded"
+              outlined="outlined"
+              icon="pi pi-arrow-left"
+              label="Back"
+              routerLink="/"
+
+              class="absolute"
+              [style.left.px]="0"
+            ></p-button>
+            <div class="relative flex p-1">
+              <div class="flex shadow-xl rounded-full">
+                <p-avatar image="profile_pictures/profile-{{clientDTO.profilePhoto}}.jpg" shape="circle"
+                          class="size-20"/>
+              </div>
+              @if (editable()) {
+                <div class="absolute bottom-0 right-0 bg-primary-200 rounded-full">
+                  <p-button
+                    outlined="outlined"
+                    size="small"
+                    rounded="rounded"
+                    icon="pi pi-angle-down"
+                    (click)="visible = true"
+                  ></p-button>
+                </div>
+                <p-dialog header="Profile picture" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+                  <span class="p-text-secondary block mb-8">Choose a profile picture.</span>
+                  <div class="flex justify-center items-center gap-5 mb-4">
+                    @for (item of profilePictures; track item) {
+                      <p-avatar image="profile_pictures/{{item.photo}}.jpg" shape="circle"
+                                (click)="chosePicture(item)" class="size-20"/>
+                    }
+                  </div>
+                </p-dialog>
+              }
+            </div>
+            <p-button
+              size="small"
+              rounded="rounded"
+              outlined="outlined"
+              [icon]="!editable() ? 'pi pi-pencil' : 'pi pi-save'"
+              [label]="!editable() ? 'Edit mode' : 'Save'"
+
+              (click)="SaveEditClick()"
+
+              class="absolute"
+              [style.right.px]="0"
+            ></p-button>
+          </div>
+
+          <div class="flex flex-col gap-5 py-3 px-15 items-center w-3/4">
+            <p-floatlabel variant="on" class="w-full">
+              <input id="username" pInputText
+                     variant="filled"
+                     [(ngModel)]="clientDTO.username"
+                     readonly="readonly"
+                     class="w-full"/>
+              <label for="username">Username</label>
+            </p-floatlabel>
+            <p-floatlabel variant="on" class="w-full">
+              <input id="email" pInputText
+                     [variant]="!editable() ? 'filled' : 'outlined'"
+                     [(ngModel)]="clientDTO.email"
+                     [readOnly]="!editable()"
+                     class="w-full"
+
+                     pTooltip="The email needs to meet the format: you@company.com"
+                     tooltipPosition="right"
+                     [tooltipDisabled]="!editable()"
+              />
+              <label for="email">Email</label>
+            </p-floatlabel>
+            @if (editable()) {
+              <p-floatlabel variant="on" class="w-full">
+                <p-password
+                  inputId="password"
+                  [(ngModel)]="clientDTO.password"
+                  [toggleMask]="true"
+                  [feedback]="false"
+
+                  [pTooltip]="'The password needs to have at least: \n - One big letter \n - One small letter \n - One digit \n - One of the following: _ * - ! $ % ?'"
+                  tooltipPosition="right"
+
+                  autocomplete="off"
+                  class="w-full"
+                  styleClass="w-full"
+                  inputStyleClass="w-full"
+                ></p-password>
+                <label for="password">Password</label>
+              </p-floatlabel>
+            }
+            <p-floatlabel variant="on" class="w-full">
+              <p-select id="motive"
+                        [variant]="!editable() ? 'filled' : 'outlined'"
+                        [(ngModel)]="clientDTO.motive"
+                        [options]="motives"
+                        optionLabel="text"
+                        optionValue="value"
+
+                        [readonly]="!editable()"
+
+
+                        class="w-full"></p-select>
+              <label for="motive">Motive</label>
+            </p-floatlabel>
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>

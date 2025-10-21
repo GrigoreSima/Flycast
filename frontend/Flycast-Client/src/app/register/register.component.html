@@ -1,0 +1,82 @@
+<div class="flex justify-center items-center min-h-screen bg-primary-700/35">
+  <p-toast></p-toast>
+  <p-card header="Hi :)" class="flex shadow-2xl text-center font-bold rounded-2xl">
+    <div class="flex flex-col gap-3 w-full">
+      <p>Please fill this form with the required info in order to create your account.</p>
+      @if (!mandatoryMessageHidden()) {
+        <p-message [life]="3500" severity="error">All fields are mandatory</p-message>
+      }
+      <div id="form" class="flex flex-col gap-5 py-3 px-15 items-center">
+        <div class="relative flex p-1">
+          <div class="flex shadow-xl rounded-full">
+            <p-avatar image="profile_pictures/{{profilePicture.photo}}.jpg" shape="circle"
+                      class="size-20"/>
+          </div>
+          <div class="absolute bottom-0 right-0">
+            <p-button
+              size="small"
+              rounded="rounded"
+              icon="pi pi-angle-down"
+              (click)="visible = true"
+            ></p-button>
+          </div>
+        </div>
+        <p-dialog header="Profile picture" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+          <span class="p-text-secondary block mb-8">Choose a profile picture.</span>
+          <div class="flex justify-center items-center gap-5 mb-4">
+            @for (item of profilePictures; track item) {
+              <p-avatar image="profile_pictures/{{item.photo}}.jpg" shape="circle"
+                        (click)="chosePicture(item)" class="size-20"/>
+            }
+          </div>
+        </p-dialog>
+        <p-floatlabel variant="on" class="w-full">
+          <input id="username" pInputText [(ngModel)]="signUpDTO.username" class="w-full"/>
+          <label for="username">Username</label>
+        </p-floatlabel>
+        <p-floatlabel variant="on" class="w-full">
+          <input id="email" pInputText pTooltip="The email needs to meet the format: you@company.com" tooltipPosition="right" [(ngModel)]="signUpDTO.email" class="w-full"/>
+          <label for="email">Email</label>
+        </p-floatlabel>
+        <p-floatlabel variant="on" class="w-full">
+          <p-password
+            inputId="password"
+            [(ngModel)]="signUpDTO.password"
+            [toggleMask]="true"
+            [feedback]="false"
+
+            [pTooltip]="'The password needs to have at least: \n - One big letter \n - One small letter \n - One digit \n - One of the following: _ * - ! $ % ?'"
+            tooltipPosition="right"
+
+            autocomplete="off"
+            class="w-full"
+            styleClass="w-full"
+            inputStyleClass="w-full"
+          ></p-password>
+          <label for="password">Password</label>
+        </p-floatlabel>
+
+        <p-floatlabel variant="on" class="w-full">
+          <p-select id="motive"
+                    [(ngModel)]="signUpDTO.motive"
+                    [options]="motives"
+                    optionLabel="text"
+                    optionValue="value"
+
+                    class="w-full"></p-select>
+          <label for="motive">Motive</label>
+        </p-floatlabel>
+      </div>
+
+      <a routerLink="/login">I already have an account</a>
+
+      <p-button
+        rounded="true"
+        class="pb-3"
+        (click)="register()"
+      >
+        R E G I S T E R
+      </p-button>
+    </div>
+  </p-card>
+</div>

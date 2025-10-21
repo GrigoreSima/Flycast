@@ -1,0 +1,78 @@
+<div class="min-w-screen min-h-screen bg-primary-900/90">
+  <p-toast></p-toast>
+  <app-navbar [items]="items"></app-navbar>
+  <div class="p-5 text-center">
+    <p-card header="Weather Report">
+      <div class="flex flex-col items-center gap-2">
+        <div class="relative flex justify-between w-full">
+          <p-button
+            size="small"
+            rounded="rounded"
+            outlined="outlined"
+            icon="pi pi-arrow-left"
+            label="Back"
+            routerLink="/history"
+
+            class="absolute"
+            [style.top.px]="-7"
+          ></p-button>
+          <div class="flex justify-center items-center gap-4 w-full">
+            <p-tag
+              [value]="forecast.date.toString()"
+              [severity]="getSeverity()"
+              icon="pi pi-calendar"
+              class="text-xs"
+            />
+            <i class="pi pi-minus"></i>
+            <p-tag
+              [value]="forecast.meteorologicalStation.name.toUpperCase()"
+              [severity]="getSeverity()"
+              icon="pi pi-map-marker"
+              class="text-xs"
+            />
+          </div>
+        </div>
+        @if (forecast.review) {
+          <p-tag
+            [value]="forecast.review"
+            [severity]="getSeverity()"
+            icon="pi pi-file-check"
+            class="text-xs"
+          />
+        }
+      </div>
+      <div class="flex flex-col gap-10 pt-6 items-center">
+        <div class="bg-primary-900/90 text-amber-50 py-3 w-3/4 rounded-xl">
+          <code>{{ forecast.metar }}</code>
+        </div>
+        <div class="grid grid-cols-4 gap-6">
+          @for (detail of this.details; track detail; let idx = $index) {
+            <div class="ring-3 ring-primary-900/90 rounded-lg bg-primary-900/90">
+              <div class="border-b-3 border-b-primary-900/90 bg-white p-2 rounded-lg">
+                <i class="{{ detail.icon }}"></i>
+                <p>{{ detail.label }}</p>
+              </div>
+              <div class="p-1 text-white">
+                <p>{{ detail.value }} {{ detail.unit }}</p>
+              </div>
+            </div>
+          }
+        </div>
+        <div class="w-1/3">
+          <p-floatlabel variant="on" class="w-full">
+            <p-select id="review"
+                      [(ngModel)]="forecast.review"
+                      [options]="reviews"
+                      optionLabel="text"
+                      optionValue="value"
+
+                      (onChange)="changedReview()"
+
+                      class="w-full"></p-select>
+            <label for="review">Review of the report</label>
+          </p-floatlabel>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="flex justify-center items-center min-h-screen bg-primary-700/35">
+  <p-toast></p-toast>
+  <p-card header="Welcome back!" class="flex shadow-2xl text-center font-bold rounded-2xl">
+    <div class="flex flex-col gap-3 w-full">
+      <div class="flex flex-col gap-5 py-6 px-5">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input id="username" pInputText [(ngModel)]="signInDTO.username" class="w-full"/>
+          <label for="username">Username</label>
+        </p-floatlabel>
+        <p-floatlabel variant="on" class="flex w-full">
+          <p-password
+            inputId="password"
+            [(ngModel)]="signInDTO.password"
+            [toggleMask]="true"
+            [feedback]="false"
+
+            autocomplete="off"
+            class="w-full"
+          ></p-password>
+          <label for="password">Password</label>
+        </p-floatlabel>
+
+      </div>
+      <a routerLink="/register">New member ?</a>
+      <p-button
+        rounded="true"
+        label="SIGN IN"
+        class="pb-3"
+        (click)="signIn()"
+      >
+      </p-button>
+    </div>
+  </p-card>
+</div>

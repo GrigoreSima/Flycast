@@ -1,0 +1,68 @@
+<div class="flex-col gap-4 min-w-screen min-h-screen bg-primary-800">
+  <app-navbar [items]="items"></app-navbar>
+  <div class="p-5">
+    <p-card>
+      <p-dataview #dv [value]="forecasts" emptyMessage="No forecasts found">
+        <ng-template #list let-items>
+          <div *ngFor="let item of items; let first = first" class="flex flex-col p-2">
+            <div class=" rounded-xl flex items-center gap-5 p-2 m-1 bg-primary-200/30">
+              <div class="flex flex-row gap-5 w-3/6 h-full">
+                <div class="relative flex gap-2 items-center">
+                  <i class="pi pi-calendar pl-4 text-blue-800/60"></i>
+                  <span class="text-sm font-medium text-secondary text-nowrap">{{ item.date }}</span>
+                  @if (item.review) {
+                    <p-tag
+                      [value]="item.review"
+                      [severity]="getSeverity(item)"
+                      class="absolute text-xs"
+                      [style.left.px]="-20"
+                      [style.top.px]="-20"
+                      [style.rotate.grad]="-25"
+                    />
+                  }
+                </div>
+                <div class="flex border-l border-l-blue-800/30"></div>
+                <div class="flex gap-2 items-center justify-center w-full">
+                  <p-tag
+                    [value]="item.meteorologicalStation.name.toUpperCase()"
+                    icon="pi pi-map-marker"
+                    class="text-xs text-nowrap"
+                  />
+                </div>
+              </div>
+              <div class="flex flex-row justify-between w-full px-3 border-l border-l-blue-800/30">
+                <div class="flex flex-row items-center justify-around w-full">
+                  <div class="flex gap-2 items-center">
+                    <i class="pi pi-sun text-amber-300"></i>
+                    <span class="text-sm font-medium text-secondary text-nowrap">{{ item.temperature }} °C</span>
+                  </div>
+                  <div class="flex gap-2 items-center">
+                    <svg width="0.5cm" height="0.5cm" viewBox="0 0 48 48" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M24 5.38L35.32 16.7C37.5587 18.9372 39.0836 21.7881 39.7018 24.8921C40.32 27.9961 40.0038 31.2137 38.7931 34.1379C37.5824 37.0622 35.5316 39.5616 32.9002 41.3202C30.2688 43.0788 27.175 44.0174 24.01 44.0174C20.8451 44.0174 17.7512 43.0788 15.1198 41.3202C12.4884 39.5616 10.4376 37.0622 9.22694 34.1379C8.01625 31.2137 7.70001 27.9961 8.31822 24.8921C8.93643 21.7881 10.4613 18.9372 12.7 16.7L24 5.38Z"
+                        stroke="#0984e3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="text-sm font-medium text-secondary text-nowrap">{{ item.humidity }} %</span>
+                  </div>
+                  <div class="flex gap-2 items-center">
+                    <i class="pi pi-cloud text-gray-300"></i>
+                    <span class="text-sm font-medium text-secondary text-nowrap">{{ item.cloudiness }} / 8</span>
+                  </div>
+                </div>
+                <p-button
+                  rounded="rounded"
+                  icon="pi pi-eye"
+                  label="View"
+                  size="small"
+                  routerLink="/history/{{ item.id }}"
+                  class="flex-auto md:flex-initial whitespace-nowrap"
+                />
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-dataview>
+    </p-card>
+  </div>
+</div>

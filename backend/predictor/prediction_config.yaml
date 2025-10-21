@@ -1,0 +1,35 @@
+Clouds:
+  max_value: 1.3390213550068162
+  min_value: -1.9408884782039335
+  model: LinearRegression
+  rounding: 0
+Dew point:
+  max_value: 1.87963360180713
+  min_value: -3.001811433314709
+  model: LinearRegression
+  rounding: 1
+Pressure:
+  max_value: 3.41968481782604
+  min_value: -2.9145467313903213
+  model: LinearRegression
+  rounding: 1
+Relative Humidity:
+  max_value: 1.908032471936768
+  min_value: -3.228689267468246
+  model: LinearRegression
+  rounding: 0
+Temperature:
+  max_value: 2.1003364189370366
+  min_value: -1.532922384591958
+  model: LinearRegression
+  rounding: 1
+Wx:
+  max_value: 2.9720611440170197
+  min_value: -2.80747616361795
+  model: LinearRegression
+  rounding: -1
+Wy:
+  max_value: 3.1349700571860426
+  min_value: -4.615097869019602
+  model: LinearRegression
+  rounding: -1

@@ -1,0 +1,30 @@
+save_to_file: 1
+# save_models: 0
+model:
+  name: [
+    MLPRegressor,
+    LinearRegression,
+    XGBRegressor,
+    RandomForestRegressor,
+    DecisionTreeRegressor,
+    # ARIMA,
+    # SARIMA,
+    # LSTM,
+    # GRU,
+    ]
+data:
+  path: data
+  # index: ["Year", "Month", "Day", "Time"]
+  index: ["Year", "Month", "Day"]
+  features: [
+    "Temperature",
+    "Relative Humidity",
+    "Pressure",
+    "Wx",
+    "Wy",
+    "Clouds",
+    "Dew point"
+    ]
+  test_size: 0.25
+  validation_size: 0
+  multiple_pred_size: 1

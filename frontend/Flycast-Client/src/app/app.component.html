@@ -1,0 +1,14 @@
+<div>
+  <router-outlet></router-outlet>
+</div>
+<p-dialog
+  [visible]="(loading$ | async)?.loading ?? false"
+  [focusTrap]="true"
+  [draggable]="false"
+  [showHeader]="false"
+  [modal]="true"
+  [closable]="false"
+  class="progress-spinner-dialog bg-transparent flex justify-center items-center"
+>
+  <p-progressSpinner class="w-0.5 h-0.5" animationDuration="0.7s" strokeWidth="3" fill="transparent"></p-progressSpinner>
+</p-dialog>

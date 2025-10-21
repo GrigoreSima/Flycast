@@ -1,0 +1,24 @@
+ARIMA: null
+DecisionTreeRegressor: null
+GRU:
+  batch_size: 32
+  columns: 5
+  dropout: 0.25
+  epochs: 50
+  timesteps: 24
+  validation_size: 0.2
+LSTM:
+  batch_size: 32
+  columns: 5
+  dropout: 0.25
+  epochs: 50
+  timesteps: 24
+  validation_size: 0.2
+LinearRegression: null
+MLPRegressor: null
+RandomForestRegressor: null
+SARIMA: null
+XGBRegressor: null
+dataset:
+  columns: 17
+  rows: 1987
